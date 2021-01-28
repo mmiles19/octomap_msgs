@@ -41,6 +41,7 @@
 #include <octomap/octomap.h>
 #include <octomap_msgs/Octomap.h>
 #include <octomap/ColorOcTree.h>
+#include <octomap/RoughOcTree.h>
 
 // new conversion functions  
 namespace octomap_msgs{
@@ -89,6 +90,16 @@ namespace octomap_msgs{
     octomap::AbstractOcTree* tree;
     if (msg.id == "ColorOcTree"){
       octomap::ColorOcTree* octree = new octomap::ColorOcTree(msg.resolution);    
+      readTree(octree, msg);
+      tree = octree;
+    }
+    else if (msg.id == "RoughOcTree"){
+      octomap::RoughOcTree* octree = new octomap::RoughOcTree(msg.resolution);    
+      readTree(octree, msg);
+      tree = octree;
+    }
+    else if (msg.id == "RoughOcTreeStamped"){
+      octomap::RoughOcTreeStamped* octree = new octomap::RoughOcTreeStamped(msg.resolution);    
       readTree(octree, msg);
       tree = octree;
     } else {
